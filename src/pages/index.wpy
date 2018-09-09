@@ -1,0 +1,166 @@
+<style lang="less">
+  .container {
+    width: 100%;
+    .week-container {
+      background-color: rgba(137, 209, 131, 1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      height: 80rpx;
+      width: 100%;
+      .week {
+        font-size: 20rpx;
+        color: #ffffff;
+        width: 14.285%;
+      }
+    }
+    .schedule-container {
+      width: 100%;
+      .row-item {
+        display: flex;
+        height: 120rpx;
+        border-bottom: solid 0.5rpx rgba(209, 231, 180, 1);
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        .item-left-side {
+          font-size: 20rpx;
+          color: #ffffff;
+          background: rgba(137, 209, 131, 1);
+        }
+        .item {
+          width: 14.285%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 23rpx;
+          border-right: solid 0.5rpx rgba(209, 231, 180, 1);
+          color: #ffffff;
+        }
+        .classThree {
+          background: rgb(147, 227, 251);
+        }
+        .classSix {
+          background: rgb(241, 170, 112);
+        }
+      }
+    }
+    .footer {
+      height: 120rpx;
+      color: rgb(229, 75, 60);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32rpx;
+    }
+  }
+</style>
+<template>
+  <view class="container">
+    <view class="week-container">
+      <repeat for="{{weekList}}">
+        <view class="week">{{item.title}}</view>
+      </repeat>
+    </view> 
+    <view class="schedule-container">
+      <repeat for="{{scheduleList}}">
+        <view class="row-item">
+          <view class="item-left-side item">{{item.title}}</view>
+          <repeat for="{{item.classList}}" item="class">
+            <view class="item" :class="{'classThree': class.type===3, 'classSix': class.type===6}">{{class.title}}</view>
+          </repeat>
+        </view>
+      </repeat>
+    </view>
+    <view class="footer">亲爱的慧慧，祝你一切顺利哟，💗</view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy';
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '慧慧课程表',
+      navigationBarBackgroundColor: '#89d183',
+      navigationBarTextStyle: 'white'
+    }
+
+    data = {
+      weekList: [
+        {},
+        { title: '周一' },
+        { title: '周二' },
+        { title: '周三' },
+        { title: '周四' },
+        { title: '周五' },
+        { title: '周六' }
+      ],
+      scheduleList: [
+        {
+          title: '一（8:15-9:00）',
+          classList: [{}, {}, { type: 6, title: '六班' }, { type: 3, title: '三班' }, {}, {}]
+        },
+        {
+          title: '二（9:10-9:55）',
+          classList: [{}, { type: 3, title: '三班' }, { type: 3, title: '三班' }, { type: 6, title: '六班' }, {}, {}]
+        },
+        {
+          title: '三（10:05-10:55）',
+          classList: [{}, { type: 3, title: '三班' }, {}, {}, { type: 6, title: '六班' }, { type: 6, title: '六班（9:50-11:20）' }]
+        },
+        {
+          title: '四（11:05-11:50）',
+          classList: [{}, {}, {}, {}, { type: 6, title: '六班' }, { type: 6, title: '六班（9:50-11:20）' }]
+        },
+        {
+          title: '五（13:30-14:15）',
+          classList: [{}, { type: 6, title: '六班' }, {}, {}, { type: 3, title: '三班' }, { type: 3, title: '三班（12:30-14:00）' }]
+        },
+        {
+          title: '六（14:25-15:10）',
+          classList: [{ type: 6, title: '六班' }, {}, {}, {}, {}, { type: 3, title: '三班（12:30-14:00）' }]
+        },
+        {
+          title: '七（15:20-16:05）',
+          classList: [{}, {}, {}, {}, {}, {}]
+        },
+        {
+          title: '八（16:15-17:00）',
+          classList: [{ type: 3, title: '三班' }, {}, {}, {}, {}, {}]
+        },
+        {
+          title: '九双（17:10-18:40）',
+          classList: [{}, { type: 6, title: '六班' }, { type: 3, title: '三班' }, {}, {}, {}]
+        },
+        {
+          title: '十双（19:00-20:30）',
+          classList: [{}, {}, {}, {}, {}, {}]
+        }
+      ]
+    }
+
+    computed = {
+    }
+
+    methods = {
+      classStyle(classType) {
+        console.log('xxxxxxx');
+        if (classStyle === 3) {
+          return 'classThree';
+        } else if (classType === 6) {
+          return 'classSix';
+        }
+        return '';
+      }
+    }
+
+    events = {
+    }
+
+    onLoad() {
+    }
+  }
+</script>
